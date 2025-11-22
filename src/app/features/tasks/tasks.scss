@@ -1,0 +1,184 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.page__subtitle {
+  font-size: 0.9rem;
+  color: rgba(229, 240, 255, 0.75);
+}
+
+.page__toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.page__toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: rgba(229, 240, 255, 0.7);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.page__state {
+  font-size: 0.9rem;
+  color: rgba(229, 240, 255, 0.85);
+}
+
+.page__state--error {
+  color: #fecaca;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5f0ff;
+}
+
+.btn--chip {
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.btn--chip.is-active {
+  background: linear-gradient(135deg, #4f46e5, #7cc4ff);
+  border-color: transparent;
+  color: #020617;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #4f46e5, #7cc4ff);
+  color: #020617;
+}
+
+.btn--primary[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.btn--xs {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.tasks__item {
+  border-radius: 0.75rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  padding: 0.75rem 1rem;
+}
+
+.tasks__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.tasks__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.tasks__meta {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.badge--prio-critical {
+  background: rgba(248, 113, 113, 0.18);
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.6);
+}
+
+.badge--prio-high {
+  background: rgba(249, 115, 22, 0.18);
+  color: #fed7aa;
+  border-color: rgba(249, 115, 22, 0.6);
+}
+
+.badge--prio-normal {
+  background: rgba(59, 130, 246, 0.18);
+  color: #bfdbfe;
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+.badge--prio-low {
+  background: rgba(34, 197, 94, 0.18);
+  color: #bbf7d0;
+  border-color: rgba(34, 197, 94, 0.6);
+}
+
+.badge--status {
+  background: rgba(148, 163, 184, 0.18);
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.6);
+}
+
+.tasks__body {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.35rem 1rem;
+}
+
+.tasks__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.tasks__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.tasks__value {
+  font-size: 0.85rem;
+}
+
+.tasks__footer {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+}

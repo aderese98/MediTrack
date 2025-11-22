@@ -1,59 +1,109 @@
-# Meditrack
+# MediTrack – Clinical Workflow Dashboard (Angular 21)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+MediTrack is a clinical workflow dashboard built with **Angular 21** that simulates how a radiopharmaceutical / oncology research network might manage:
 
-## Development server
+- Patient enrollment & status
+- Imaging and therapy study orders
+- Daily appointment schedule
+- Operational tasks for coordinators and clinicians
 
-To start a local development server, run:
+It uses a **mock REST API** to model integration with clinical systems (PACS/RIS/EMR-style backends) and demonstrates modern Angular patterns:
+**standalone components, signals, new control flow (`@if`, `@for`), reactive forms, and RxJS interop**.
+
+---
+
+## Features
+
+### 📋 Patient Management
+
+- Patient list with **search, status filters, and sortable columns**
+- **Create** new patients with a validated reactive form
+- **Edit** existing patients via an API-backed edit form
+- Status chips for Active / Completed / On Hold
+- Automatic `lastUpdated` timestamps
+
+### 🧪 Studies & Orders
+
+- Table of imaging/therapy orders with:
+  - Filters by **modality** (PET/CT/MRI/NM)
+  - Filters by **status** (Scheduled, In Progress, Completed, Cancelled)
+- Sorted by earliest scheduled date to help staff prioritize
+
+### 📅 Schedule
+
+- Agenda-style view of upcoming appointments
+- Quick range selector:
+  - **Today**
+  - **Next 7 days**
+  - **All upcoming**
+- Shows appointment type, location, clinician, and status
+
+### ✅ Tasks Queue
+
+- Task board for coordinators / clinicians
+- Filter tasks by **status** (Open, In Progress, Done)
+- Filter tasks by **priority** (Critical, High, Normal, Low)
+- Click to cycle task status:
+  - Open → In Progress → Done → Open
+- Changes are persisted via a mock API (`json-server`)
+
+### 🧭 Dashboard Overview
+
+- High-level snapshot of operational health:
+  - Active patients
+  - Scheduled studies
+  - Today’s appointments
+  - Open tasks (with count of high-priority items)
+- Cards link into the relevant sections (Patients, Studies, Schedule, Tasks)
+
+---
+
+## Tech Stack
+
+- **Frontend**
+  - Angular 21 (standalone components, signals, new control flow)
+  - TypeScript, HTML, SCSS
+  - RxJS (`forkJoin`, `takeUntilDestroyed`)
+
+- **API / Backend (Mocked)**
+  - `json-server` serving:
+    - `/patients`
+    - `/studyOrders`
+    - `/appointments`
+    - `/tasks`
+  - Simulates integration with clinical systems / PACS / RIS / EMR
+
+---
+
+## Architecture
+
+- `src/app/core`
+  - `models/` – TypeScript interfaces for domain objects: `Patient`, `StudyOrder`, `Appointment`, `Task`
+  - `clinical-data.service.ts` – single entry point for all HTTP calls
+- `src/app/features`
+  - `dashboard.*` – high-level summary cards
+  - `patients.*` – list, search, filter, sort, navigate to create/edit
+  - `patient-form.*` – create patient (reactive form)
+  - `patient-edit.*` – edit patient (signals + reactive form)
+  - `studies.*` – studies/orders table with filters
+  - `schedule.*` – appointment agenda with date range filters
+  - `tasks.*` – tasks queue with filters and status toggling
+- `app.routes.ts`
+  - Routes for `/dashboard`, `/patients`, `/patients/new`, `/patients/:id/edit`, `/studies`, `/schedule`, `/tasks`
+
+Patterns used:
+
+- **Signals** for UI state (`loading`, filters, derived lists)
+- **`computed()`** for filtered + sorted collections
+- **New control flow** (`@if`, `@for`) instead of `*ngIf` / `*ngFor`
+- **`takeUntilDestroyed`** for automatic subscription cleanup
+- **Reactive forms** for create/edit workflows
+
+---
+
+## Getting Started
+
+### 1. Install dependencies
 
 ```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+npm install

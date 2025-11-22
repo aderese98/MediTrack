@@ -1,0 +1,84 @@
+<section class="page">
+  <div class="page__header">
+    <div>
+      <h1>Schedule</h1>
+      <p class="page__subtitle">
+        View upcoming consults, imaging, and therapy appointments.
+      </p>
+    </div>
+
+    <div class="page__toolbar">
+      <button
+        class="btn btn--chip"
+        [class.is-active]="range() === 'today'"
+        (click)="setRange('today')"
+      >
+        Today
+      </button>
+      <button
+        class="btn btn--chip"
+        [class.is-active]="range() === 'week'"
+        (click)="setRange('week')"
+      >
+        Next 7 days
+      </button>
+      <button
+        class="btn btn--chip"
+        [class.is-active]="range() === 'all'"
+        (click)="setRange('all')"
+      >
+        All upcoming
+      </button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="page__state">Loading schedule…</div>
+  } @else if (error()) {
+    <div class="page__state page__state--error">
+      {{ error() }}
+    </div>
+  } @else {
+    @if (filteredAppointments().length === 0) {
+      <div class="page__state">
+        No appointments in this range.
+      </div>
+    } @else {
+      <div class="schedule">
+        @for (appt of filteredAppointments(); track appt.id) {
+          <article class="schedule__item">
+            <header class="schedule__item-header">
+              <div class="schedule__item-time">
+                {{ formatDate(appt.startTime) }}
+                ·
+                {{ formatTimeRange(appt.startTime, appt.endTime) }}
+              </div>
+              <div class="schedule__item-type">
+                {{ appt.type }}
+              </div>
+            </header>
+
+            <div class="schedule__item-body">
+              <div class="schedule__row">
+                <span class="schedule__label">Patient ID</span>
+                <span class="schedule__value">#{{ appt.patientId }}</span>
+              </div>
+              <div class="schedule__row">
+                <span class="schedule__label">Location</span>
+                <span class="schedule__value">{{ appt.location }}</span>
+              </div>
+              <div class="schedule__row">
+                <span class="schedule__label">Clinician</span>
+                <span class="schedule__value">{{ appt.clinician }}</span>
+              </div>
+              <div class="schedule__row">
+                <span class="schedule__label">Status</span>
+                <span class="schedule__value">{{ appt.status }}</span>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  }
+</section>

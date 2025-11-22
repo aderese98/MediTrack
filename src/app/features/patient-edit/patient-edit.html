@@ -1,0 +1,166 @@
+<section class="page page--form">
+  <div class="page__header">
+    <div>
+      <h1>{{ pageTitle() }}</h1>
+      <p class="page__subtitle">
+        Update patient demographics and status as their treatment progresses.
+      </p>
+    </div>
+
+    <div class="page__header-actions">
+      <a routerLink="/patients" class="btn">
+        Back to Patients
+      </a>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="page__state">Loading patient…</div>
+  } @else if (loadingError()) {
+    <div class="page__state page__state--error">
+      {{ loadingError() }}
+    </div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="form">
+      <div class="form__grid">
+        <!-- MRN -->
+        <div class="form__field">
+          <label class="label">
+            MRN
+            <input
+              type="text"
+              formControlName="mrn"
+              class="input"
+              placeholder="UT-0004"
+            />
+          </label>
+          <div class="form__error" *ngIf="f['mrn'].touched && f['mrn'].invalid">
+            MRN is required and must be at most 20 characters.
+          </div>
+        </div>
+
+        <!-- First name -->
+        <div class="form__field">
+          <label class="label">
+            First name
+            <input
+              type="text"
+              formControlName="firstName"
+              class="input"
+              placeholder="First name"
+            />
+          </label>
+          <div
+            class="form__error"
+            *ngIf="f['firstName'].touched && f['firstName'].invalid"
+          >
+            First name is required.
+          </div>
+        </div>
+
+        <!-- Last name -->
+        <div class="form__field">
+          <label class="label">
+            Last name
+            <input
+              type="text"
+              formControlName="lastName"
+              class="input"
+              placeholder="Last name"
+            />
+          </label>
+          <div
+            class="form__error"
+            *ngIf="f['lastName'].touched && f['lastName'].invalid"
+          >
+            Last name is required.
+          </div>
+        </div>
+
+        <!-- Date of birth -->
+        <div class="form__field">
+          <label class="label">
+            Date of birth
+            <input type="date" formControlName="dateOfBirth" class="input" />
+          </label>
+          <div
+            class="form__error"
+            *ngIf="f['dateOfBirth'].touched && f['dateOfBirth'].invalid"
+          >
+            Date of birth is required.
+          </div>
+        </div>
+
+        <!-- Sex -->
+        <div class="form__field">
+          <label class="label">
+            Sex
+            <select formControlName="sex" class="select">
+              <option value="F">Female</option>
+              <option value="M">Male</option>
+              <option value="O">Other / Not specified</option>
+            </select>
+          </label>
+          <div class="form__error" *ngIf="f['sex'].touched && f['sex'].invalid">
+            Please select a value.
+          </div>
+        </div>
+
+        <!-- Primary Oncologist -->
+        <div class="form__field form__field--wide">
+          <label class="label">
+            Primary oncologist
+            <input
+              type="text"
+              formControlName="primaryOncologist"
+              class="input"
+              placeholder="Dr. Alvarez"
+            />
+          </label>
+          <div
+            class="form__error"
+            *ngIf="
+              f['primaryOncologist'].touched && f['primaryOncologist'].invalid
+            "
+          >
+            Primary oncologist is required.
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="form__field">
+          <label class="label">
+            Status
+            <select formControlName="status" class="select">
+              <option *ngFor="let s of statusOptions" [value]="s">
+                {{ s }}
+              </option>
+            </select>
+          </label>
+          <div
+            class="form__error"
+            *ngIf="f['status'].touched && f['status'].invalid"
+          >
+            Status is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form__footer">
+        @if (submitError()) {
+          <div class="form__error form__error--global">
+            {{ submitError() }}
+          </div>
+        }
+
+        <button
+          class="btn btn--primary"
+          type="submit"
+          [disabled]="form.invalid || submitting()"
+        >
+          {{ submitting() ? 'Saving…' : 'Save Changes' }}
+        </button>
+      </div>
+    </form>
+  }
+</section>

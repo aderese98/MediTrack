@@ -1,0 +1,85 @@
+<section class="page">
+  <div class="page__header">
+    <div>
+      <h1>Studies & Orders</h1>
+      <p class="page__subtitle">
+        Track imaging and therapy orders across all sites.
+      </p>
+    </div>
+
+    <div class="page__toolbar">
+      <div class="page__toolbar-group">
+        <label class="label">
+          Modality
+          <select
+            class="select"
+            (change)="onModalityChange($any($event.target).value ?? 'all')"
+          >
+            <option value="all">All</option>
+            <option value="PET">PET</option>
+            <option value="CT">CT</option>
+            <option value="MRI">MRI</option>
+            <option value="NM">NM</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="page__toolbar-group">
+        <label class="label">
+          Status
+          <select
+            class="select"
+            (change)="onStatusChange($any($event.target).value ?? 'all')"
+          >
+            <option value="all">All</option>
+            <option value="Scheduled">Scheduled</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="page__state">Loading study orders…</div>
+  } @else if (error()) {
+    <div class="page__state page__state--error">
+      {{ error() }}
+    </div>
+  } @else {
+    @if (filteredStudies().length === 0) {
+      <div class="page__state">
+        No study orders match your filters.
+      </div>
+    } @else {
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Accession</th>
+            <th>Patient ID</th>
+            <th>Modality</th>
+            <th>Description</th>
+            <th>Scheduled For</th>
+            <th>Status</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (order of filteredStudies(); track order.id) {
+            <tr>
+              <td>{{ order.accessionNumber }}</td>
+              <td>{{ order.patientId }}</td>
+              <td>{{ order.modality }}</td>
+              <td>{{ order.description }}</td>
+              <td>{{ formatDateTime(order.scheduledFor) }}</td>
+              <td>{{ order.status }}</td>
+              <td>{{ order.location }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+</section>

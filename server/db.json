@@ -1,0 +1,117 @@
+{
+  "patients": [
+    {
+      "id": "1",
+      "mrn": "UT-0001",
+      "firstName": "Emily",
+      "lastName": "Chen",
+      "dateOfBirth": "1975-03-14",
+      "sex": "F",
+      "primaryOncologist": "Dr. Alvarez",
+      "status": "Active",
+      "lastUpdated": "2025-11-20T09:15:00Z"
+    },
+    {
+      "id": "2",
+      "mrn": "UT-0002",
+      "firstName": "Miguel",
+      "lastName": "Rodriguez",
+      "dateOfBirth": "1968-08-02",
+      "sex": "M",
+      "primaryOncologist": "Dr. Patil",
+      "status": "On Hold",
+      "lastUpdated": "2025-11-18T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "mrn": "UT-0003",
+      "firstName": "Aisha",
+      "lastName": "Khan",
+      "dateOfBirth": "1983-01-22",
+      "sex": "F",
+      "primaryOncologist": "Dr. Nguyen",
+      "status": "Completed",
+      "lastUpdated": "2025-11-10T11:05:00Z"
+    }
+  ],
+  "studyOrders": [
+    {
+      "id": "1",
+      "patientId": 1,
+      "accessionNumber": "STUDY-1001",
+      "modality": "PET",
+      "description": "PET/CT TheraScan baseline",
+      "scheduledFor": "2025-11-23T13:00:00Z",
+      "status": "Scheduled",
+      "location": "Austin - Suite 2"
+    },
+    {
+      "id": "2",
+      "patientId": 1,
+      "accessionNumber": "STUDY-1002",
+      "modality": "CT",
+      "description": "CT thorax follow-up",
+      "scheduledFor": "2025-12-01T15:30:00Z",
+      "status": "Scheduled",
+      "location": "Austin - Suite 4"
+    },
+    {
+      "id": "3",
+      "patientId": 2,
+      "accessionNumber": "STUDY-1003",
+      "modality": "MRI",
+      "description": "Brain MRI",
+      "scheduledFor": "2025-11-21T10:00:00Z",
+      "status": "Completed",
+      "location": "Houston - MRI 1"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "1",
+      "patientId": 1,
+      "type": "Consult",
+      "startTime": "2025-11-22T09:00:00Z",
+      "endTime": "2025-11-22T09:30:00Z",
+      "location": "Austin - Room 5",
+      "clinician": "Dr. Alvarez",
+      "status": "Scheduled"
+    },
+    {
+      "id": "2",
+      "patientId": 2,
+      "type": "Therapy",
+      "startTime": "2025-11-22T11:00:00Z",
+      "endTime": "2025-11-22T13:00:00Z",
+      "location": "Houston - Treatment Bay",
+      "clinician": "Dr. Patil",
+      "status": "Scheduled"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Verify consent forms",
+      "patientId": 1,
+      "assignedTo": "Clinical Coordinator",
+      "dueDate": "2025-11-22T17:00:00Z",
+      "priority": "High",
+      "status": "Open"
+    },
+    {
+      "id": "2",
+      "title": "Schedule follow-up PET scan",
+      "patientId": 3,
+      "assignedTo": "Scheduling",
+      "priority": "Normal",
+      "status": "Open"
+    },
+    {
+      "id": "3",
+      "title": "Update EMR notes",
+      "assignedTo": "Nurse Team",
+      "priority": "Low",
+      "status": "Open"
+    }
+  ]
+}

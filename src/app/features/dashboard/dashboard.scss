@@ -1,0 +1,100 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.page__subtitle {
+  font-size: 0.9rem;
+  color: rgba(229, 240, 255, 0.75);
+}
+
+.page__header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e5f0ff;
+}
+
+.page__state {
+  font-size: 0.9rem;
+  color: rgba(229, 240, 255, 0.85);
+}
+
+.page__state--error {
+  color: #fecaca;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.card {
+  display: block;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  background: radial-gradient(circle at top left, #111827, #020617);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.1s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.7);
+  border-color: rgba(96, 165, 250, 0.9);
+}
+
+.card__title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.card__value {
+  margin-top: 0.2rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.card__hint {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: rgba(209, 213, 219, 0.9);
+}
+
+.card__pill-row {
+  margin-top: 0.2rem;
+}
+
+.card__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(248, 113, 113, 0.16);
+  color: #fecaca;
+}

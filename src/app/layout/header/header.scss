@@ -1,0 +1,74 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: radial-gradient(circle at top left, #1a2c4a, #050812);
+}
+
+.header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.header__logo {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #7cc4ff;
+}
+
+.header__subtitle {
+  font-size: 0.8rem;
+  color: rgba(229, 240, 255, 0.7);
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header__env {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 196, 255, 0.4);
+  color: #7cc4ff;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.header__user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f46e5, #7cc4ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.header__user-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.header__user-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.header__user-role {
+  font-size: 0.75rem;
+  color: rgba(229, 240, 255, 0.7);
+}

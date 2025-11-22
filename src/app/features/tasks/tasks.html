@@ -1,0 +1,149 @@
+<section class="page">
+  <div class="page__header">
+    <div>
+      <h1>Tasks</h1>
+      <p class="page__subtitle">
+        Work queue for coordinators, clinicians, and support staff.
+      </p>
+    </div>
+
+    <div class="page__toolbar">
+      <div class="page__toolbar-group">
+        <span class="label">Status</span>
+        <div class="chip-row">
+          <button
+            class="btn btn--chip"
+            [class.is-active]="statusFilter() === 'all'"
+            (click)="setStatusFilter('all')"
+          >
+            All
+          </button>
+          <button
+            class="btn btn--chip"
+            [class.is-active]="statusFilter() === 'Open'"
+            (click)="setStatusFilter('Open')"
+          >
+            Open
+          </button>
+          <button
+            class="btn btn--chip"
+            [class.is-active]="statusFilter() === 'In Progress'"
+            (click)="setStatusFilter('In Progress')"
+          >
+            In Progress
+          </button>
+          <button
+            class="btn btn--chip"
+            [class.is-active]="statusFilter() === 'Done'"
+            (click)="setStatusFilter('Done')"
+          >
+            Done
+          </button>
+        </div>
+      </div>
+
+      <div class="page__toolbar-group">
+        <span class="label">Priority</span>
+        <div class="chip-row">
+          <button
+            class="btn btn--chip"
+            [class.is-active]="priorityFilter() === 'all'"
+            (click)="setPriorityFilter('all')"
+          >
+            All
+          </button>
+          <button
+            class="btn btn--chip"
+            [class.is-active]="priorityFilter() === 'Critical'"
+            (click)="setPriorityFilter('Critical')"
+          >
+            Critical
+          </button>
+          <button
+            class="btn btn--chip"
+            [class.is-active]="priorityFilter() === 'High'"
+            (click)="setPriorityFilter('High')"
+          >
+            High
+          </button>
+          <button
+            class="btn btn--chip"
+            [class.is-active]="priorityFilter() === 'Normal'"
+            (click)="setPriorityFilter('Normal')"
+          >
+            Normal
+          </button>
+          <button
+            class="btn btn--chip"
+            [class.is-active]="priorityFilter() === 'Low'"
+            (click)="setPriorityFilter('Low')"
+          >
+            Low
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="page__state">Loading tasks…</div>
+  } @else if (error()) {
+    <div class="page__state page__state--error">
+      {{ error() }}
+    </div>
+  } @else {
+    @if (filteredTasks().length === 0) {
+      <div class="page__state">
+        No tasks match your filters.
+      </div>
+    } @else {
+      <div class="tasks">
+        @for (task of filteredTasks(); track task.id) {
+          <article class="tasks__item">
+            <header class="tasks__header">
+              <div class="tasks__title">
+                {{ task.title }}
+              </div>
+              <div class="tasks__meta">
+                <span class="badge" [ngClass]="'badge--prio-' + task.priority.toLowerCase()">
+                  {{ task.priority }}
+                </span>
+                <span class="badge badge--status">
+                  {{ task.status }}
+                </span>
+              </div>
+            </header>
+
+            <div class="tasks__body">
+              <div class="tasks__row">
+                <span class="tasks__label">Assigned to</span>
+                <span class="tasks__value">{{ task.assignedTo }}</span>
+              </div>
+
+              <div class="tasks__row">
+                <span class="tasks__label">Due</span>
+                <span class="tasks__value">{{ formatDueDate(task.dueDate) }}</span>
+              </div>
+
+              <div class="tasks__row" *ngIf="task.patientId">
+                <span class="tasks__label">Patient ID</span>
+                <span class="tasks__value">#{{ task.patientId }}</span>
+              </div>
+            </div>
+
+            <footer class="tasks__footer">
+              <button
+                class="btn btn--primary btn--xs"
+                type="button"
+                (click)="onToggleStatus(task)"
+                [disabled]="isUpdating(task.id)"
+              >
+                {{ isUpdating(task.id) ? 'Updating…' : 'Mark as ' + nextStatus(task.status) }}
+              </button>
+            </footer>
+          </article>
+        }
+      </div>
+    }
+  }
+</section>

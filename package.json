@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:meditrack": "node dist/meditrack/server/server.mjs"
+    "serve:ssr:meditrack": "node dist/meditrack/server/server.mjs",
+    "api": "json-server --watch server/db.json --port 4300"
   },
   "prettier": {
     "printWidth": 100,
@@ -43,6 +44,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",
+    "json-server": "^1.0.0-beta.3",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }

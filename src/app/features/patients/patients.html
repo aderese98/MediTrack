@@ -1,0 +1,125 @@
+<section class="page">
+  <div class="page__header">
+    <div>
+      <h1>Patients</h1>
+      <p class="page__subtitle">
+        Manage enrolled patients and quickly see their current status.
+      </p>
+    </div>
+
+    <div class="page__header-actions">
+      <button class="btn btn--primary" routerLink="/patients/new">
+        + New Patient
+      </button>
+    </div>
+  </div>
+
+  <div class="page__toolbar">
+    <div class="page__toolbar-group">
+      <input
+        type="search"
+        class="input"
+        placeholder="Search by name, MRN, oncologist…"
+        (input)="onSearch($any($event.target).value ?? '')"
+      />
+    </div>
+
+    <div class="page__toolbar-group">
+      <label class="label">
+        Status
+        <select
+          class="select"
+          (change)="onStatusFilterChange($any($event.target).value ?? 'all')"
+        >
+          <option value="all">All</option>
+          <option value="Active">Active</option>
+          <option value="Completed">Completed</option>
+          <option value="On Hold">On Hold</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="page__state">Loading patients…</div>
+  } @else if (error()) {
+    <div class="page__state page__state--error">
+      {{ error() }}
+    </div>
+  } @else {
+    @if (filteredPatients().length === 0) {
+      <div class="page__state">
+        No patients match your filters.
+      </div>
+    } @else {
+      <table class="table">
+        <thead>
+          <tr>
+            <th (click)="toggleSort('mrn')" class="table__th-sortable">
+              MRN
+              <span class="table__sort-indicator" [class.is-active]="sortField() === 'mrn'">
+                {{ sortField() === 'mrn' ? (sortDirection() === 'asc' ? '▲' : '▼') : '·' }}
+              </span>
+            </th>
+            <th (click)="toggleSort('lastName')" class="table__th-sortable">
+              Patient
+              <span
+                class="table__sort-indicator"
+                [class.is-active]="sortField() === 'lastName'"
+              >
+                {{ sortField() === 'lastName' ? (sortDirection() === 'asc' ? '▲' : '▼') : '·' }}
+              </span>
+            </th>
+            <th>DOB</th>
+            <th>Primary Oncologist</th>
+            <th>Status</th>
+            <th (click)="toggleSort('lastUpdated')" class="table__th-sortable">
+              Last Updated
+              <span
+                class="table__sort-indicator"
+                [class.is-active]="sortField() === 'lastUpdated'"
+              >
+                {{
+                  sortField() === 'lastUpdated'
+                    ? (sortDirection() === 'asc' ? '▲' : '▼')
+                    : '·'
+                }}
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (patient of filteredPatients(); track patient.id) {
+            <tr>
+              <td>{{ patient.mrn }}</td>
+              <td>{{ patient.lastName }}, {{ patient.firstName }}</td>
+              <td>{{ formatDob(patient.dateOfBirth) }}</td>
+              <td>{{ patient.primaryOncologist }}</td>
+              <td>
+                <span
+                  class="chip"
+                  [ngClass]="
+                    'chip--status-' + patient.status.replace(' ', '').toLowerCase()
+                  "
+                >
+                  {{ patient.status }}
+                </span>
+              </td>
+              <td class="table__cell-actions">
+                <span class="table__cell-text">
+                  {{ formatLastUpdated(patient.lastUpdated) }}
+                </span>
+                <a
+                  class="btn btn--ghost btn--xs"
+                  [routerLink]="['/patients', patient.id, 'edit']"
+                >
+                  Edit
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+</section>

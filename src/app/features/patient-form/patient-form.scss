@@ -1,0 +1,122 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.page--form {
+  max-width: 960px;
+}
+
+.page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.page__subtitle {
+  font-size: 0.9rem;
+  color: rgba(229, 240, 255, 0.75);
+}
+
+.page__header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-weight: 500;
+  background: rgba(148, 163, 184, 0.2);
+  color: #e5f0ff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  background: rgba(148, 163, 184, 0.35);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #4f46e5, #7cc4ff);
+  color: #0b1020;
+}
+
+.btn--primary[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.form {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form__field--wide {
+  grid-column: span 2;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: rgba(229, 240, 255, 0.7);
+}
+
+.input,
+.select {
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5f0ff;
+  font-size: 0.85rem;
+}
+
+.input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #7cc4ff;
+  box-shadow: 0 0 0 1px rgba(124, 196, 255, 0.5);
+}
+
+.form__error {
+  font-size: 0.75rem;
+  color: #fecaca;
+}
+
+.form__error--global {
+  margin-right: auto;
+}
+
+.form__footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+}

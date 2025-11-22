@@ -1,0 +1,29 @@
+<aside class="sidebar">
+  <div class="sidebar__section sidebar__section--title">
+    <div class="sidebar__app-tag">UT Clinical</div>
+    <div class="sidebar__app-desc">Research & Therapy</div>
+  </div>
+
+  <nav class="sidebar__section sidebar__nav">
+    <a routerLink="/dashboard" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">
+      <span>Dashboard</span>
+    </a>
+    <a routerLink="/patients" routerLinkActive="is-active">
+      <span>Patients</span>
+    </a>
+    <a routerLink="/studies" routerLinkActive="is-active">
+      <span>Studies & Orders</span>
+    </a>
+    <a routerLink="/schedule" routerLinkActive="is-active">
+      <span>Schedule</span>
+    </a>
+    <a routerLink="/tasks" routerLinkActive="is-active">
+      <span>Tasks</span>
+    </a>
+  </nav>
+
+  <div class="sidebar__section sidebar__footer">
+    <div class="sidebar__footer-label">Environment</div>
+    <div class="sidebar__footer-value">Demo / Local</div>
+  </div>
+</aside>

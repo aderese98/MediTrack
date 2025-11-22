@@ -1,0 +1,56 @@
+<section class="page">
+  <div class="page__header">
+    <div>
+      <h1>MediTrack Overview</h1>
+      <p class="page__subtitle">
+        Snapshot of clinical activity across patients, studies, schedule, and tasks.
+      </p>
+    </div>
+
+    <div class="page__header-meta">
+      <span class="badge">Today · {{ todayLabel() }}</span>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="page__state">Loading dashboard…</div>
+  } @else if (error()) {
+    <div class="page__state page__state--error">
+      {{ error() }}
+    </div>
+  } @else if (stats()) {
+    <div class="cards">
+      <a routerLink="/patients" class="card">
+        <div class="card__title">Active patients</div>
+        <div class="card__value">{{ stats()!.activePatients }}</div>
+        <div class="card__hint">Enrolled and currently under care.</div>
+      </a>
+
+      <a routerLink="/studies" class="card">
+        <div class="card__title">Scheduled studies</div>
+        <div class="card__value">{{ stats()!.scheduledStudies }}</div>
+        <div class="card__hint">Imaging & therapy orders not yet completed.</div>
+      </a>
+
+      <a routerLink="/schedule" class="card">
+        <div class="card__title">Today’s appointments</div>
+        <div class="card__value">{{ stats()!.todaysAppointments }}</div>
+        <div class="card__hint">Consults and treatments scheduled for today.</div>
+      </a>
+
+      <a routerLink="/tasks" class="card">
+        <div class="card__title">Open tasks</div>
+        <div class="card__value">
+          {{ stats()!.openTasks }}
+        </div>
+        <div class="card__pill-row">
+          <span class="card__pill">
+            High priority:
+            <strong>{{ stats()!.highPriorityOpenTasks }}</strong>
+          </span>
+        </div>
+        <div class="card__hint">Items not yet marked done.</div>
+      </a>
+    </div>
+  }
+</section>
